@@ -1,4 +1,4 @@
-const firebase = require('./../../libs/firebase');
+const firebase = require('../libs/firebase');
 
 const controller = {
   getAll: async (req, res, next) => {
