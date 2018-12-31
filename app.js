@@ -3,12 +3,14 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const enrouten = require('express-enrouten');
+const expressValidator = require('express-validator');
 require('./configs/firebase');
 
 /* eslint-disable no-console */
 
 const app = express();
 
+app.use(expressValidator());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
