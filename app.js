@@ -17,7 +17,12 @@ app.use(enrouten({
   directory: path.join(__dirname, 'controllers'),
 }));
 
-app.use((err, req, res, next) => res.status(500).json({ message: 'Internal server error!', error: err }));
+app.use((err, req, res, next) => res.status(500).json({
+  status: 500,
+  success: false,
+  message: 'Internal server error!',
+  error: err.message
+}));
 
 const port = process.env.PORT;
 
