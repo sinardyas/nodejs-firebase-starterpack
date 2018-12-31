@@ -60,10 +60,9 @@ const controller = {
       verse,
       verseBody
     } = req.body;
-    let result;
 
     try {
-      result = await firebase.create({
+      await firebase.create({
         body,
         date,
         title,
@@ -76,8 +75,53 @@ const controller = {
 
     return res.status(200).json({
       status: 200,
-      success: true,
-      data: result
+      success: true
+    });
+  },
+
+  update: async (req, res, next) => {
+    req.checkBody({
+      body: { notEmpty: true, errorMessage: 'body is required' },
+      date: { notEmpty: true, errorMessage: 'date is required' },
+      title: { notEmpty: true, errorMessage: 'title is required' },
+      verse: { notEmpty: true, errorMessage: 'verse is required' },
+      verseBody: { notEmpty: true, errorMessage: 'verseBody is required' }
+    });
+
+    const errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).json({
+        status: 400,
+        success: false,
+        message: errors
+      });
+    }
+
+    const {
+      body,
+      date,
+      title,
+      verse,
+      verseBody
+    } = req.body;
+    const { id } = req.params;
+
+    try {
+      await firebase.update({
+        body,
+        date,
+        title,
+        verse,
+        verseBody,
+        id
+      });
+    } catch (e) {
+      return next(e);
+    }
+
+    return res.status(200).json({
+      status: 200,
+      success: true
     });
   }
 };
@@ -85,4 +129,5 @@ const controller = {
 module.exports = (router) => {
   router.get('/', controller.getAll);
   router.post('/', controller.create);
+  router.post('/:id', controller.update);
 };

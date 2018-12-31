@@ -49,5 +49,26 @@ module.exports = {
     });
 
     resolve(postRef);
+  }),
+
+  update: params => new Promise((resolve) => {
+    const {
+      body,
+      date,
+      title,
+      verse,
+      verseBody,
+      id
+    } = params;
+    const ref = db.ref('reflection');
+    const postRef = ref.child(`${id}`).update({
+      body,
+      date,
+      title,
+      verse,
+      verseBody
+    });
+
+    resolve(postRef);
   })
 };
