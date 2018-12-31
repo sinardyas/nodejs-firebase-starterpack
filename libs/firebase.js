@@ -4,10 +4,12 @@ const db = admin.database();
 
 module.exports = {
   getAll: req => new Promise((resolve) => {
-    const { page, limit } = req;
+    const { page = 1, limit = 10 } = req;
+    const pageValue = (page - 1) * parseInt(limit, 10);
+    const limitValue = parseInt(limit, 10);
     const ref = db.ref('reflection');
 
-    ref.orderByKey().startAt(`${(page - 1) * parseInt(limit, 10)}`).limitToFirst(parseInt(limit, 10)).on('value', (data) => {
+    ref.orderByKey().startAt(`${pageValue}`).limitToFirst(limitValue).on('value', (data) => {
       resolve(data);
     });
   }),

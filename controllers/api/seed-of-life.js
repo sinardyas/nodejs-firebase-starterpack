@@ -20,6 +20,7 @@ const controller = {
     });
 
     return res.status(200).json({
+      status: 200,
       success: true,
       data: {
         currentPage: parseInt(page, 10),
