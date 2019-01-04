@@ -6,7 +6,7 @@ const controller = {
     let totalData;
     const { page } = req.query;
     const data = [];
-    const value = page < 10 ? `0${page}` : `${page}`;
+    const value = page.padStart(2, '0');
     const query = {
       field: 'date',
       startAtValue: value,
