@@ -70,5 +70,15 @@ module.exports = {
     });
 
     resolve(postRef);
+  }),
+
+  delete: params => new Promise((resolve) => {
+    const { id } = params;
+
+    const ref = db.ref('reflection');
+    const postRef = ref.child(`${id}`);
+    postRef.remove();
+
+    resolve(postRef);
   })
 };

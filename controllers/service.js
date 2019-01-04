@@ -123,11 +123,27 @@ const controller = {
       status: 200,
       success: true
     });
+  },
+
+  delete: async (req, res, next) => {
+    const { id } = req.params;
+
+    try {
+      await firebase.delete({ id });
+    } catch (e) {
+      return next(e);
+    }
+
+    return res.status(200).json({
+      status: 200,
+      success: true
+    });
   }
 };
 
 module.exports = (router) => {
   router.get('/', controller.getAll);
   router.post('/', controller.create);
-  router.post('/:id', controller.update);
+  router.post('/:id/update', controller.update);
+  router.post('/:id/delete', controller.delete);
 };
