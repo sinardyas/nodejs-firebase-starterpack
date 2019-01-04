@@ -4,7 +4,7 @@ const controller = {
   getAll: async (req, res, next) => {
     let ref;
     let totalData;
-    const { page } = req.query;
+    const { page = 1 } = req.query;
     const data = [];
     const value = page.padStart(2, '0');
     const query = {
