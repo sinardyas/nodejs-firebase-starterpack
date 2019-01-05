@@ -23,7 +23,7 @@ app.use(enrouten({
 app.use((err, req, res, next) => res.status(httpStatus.internalServerError).json({
   status: httpStatus.internalServerError,
   success: false,
-  message: 'Internal server error!',
+  message: 'Internal server error! ',
   error: err.message
 }));
 
