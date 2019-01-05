@@ -4,6 +4,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const enrouten = require('express-enrouten');
 const expressValidator = require('express-validator');
+const { httpStatus } = require('./configs/app');
 require('./configs/firebase');
 
 /* eslint-disable no-console */
@@ -19,10 +20,10 @@ app.use(enrouten({
   directory: path.join(__dirname, 'controllers'),
 }));
 
-app.use((err, req, res, next) => res.status(500).json({
-  status: 500,
+app.use((err, req, res, next) => res.status(httpStatus.internalServerError).json({
+  status: httpStatus.internalServerError,
   success: false,
-  message: 'Internal server error! ',
+  message: 'Internal server error!',
   error: err.message
 }));
 

@@ -1,4 +1,5 @@
 const firebase = require('../libs/firebase');
+const { httpStatus } = require('./../configs/app');
 
 const controller = {
   getAll: async (req, res, next) => {
@@ -24,8 +25,8 @@ const controller = {
       data.push(element.val());
     });
 
-    return res.status(200).json({
-      status: 200,
+    return res.status(httpStatus.ok).json({
+      status: httpStatus.ok,
       success: true,
       data: {
         currentPage: parseInt(page, 10),
@@ -46,8 +47,8 @@ const controller = {
 
     const errors = req.validationErrors();
     if (errors) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(httpStatus.badRequest).json({
+        status: httpStatus.badRequest,
         success: false,
         message: errors
       });
@@ -73,8 +74,8 @@ const controller = {
       return next(e);
     }
 
-    return res.status(200).json({
-      status: 200,
+    return res.status(httpStatus.ok).json({
+      status: httpStatus.ok,
       success: true
     });
   },
@@ -90,8 +91,8 @@ const controller = {
 
     const errors = req.validationErrors();
     if (errors) {
-      return res.status(400).json({
-        status: 400,
+      return res.status(httpStatus.badRequest).json({
+        status: httpStatus.badRequest,
         success: false,
         message: errors
       });
@@ -119,8 +120,8 @@ const controller = {
       return next(e);
     }
 
-    return res.status(200).json({
-      status: 200,
+    return res.status(httpStatus.ok).json({
+      status: httpStatus.ok,
       success: true
     });
   },
@@ -134,8 +135,8 @@ const controller = {
       return next(e);
     }
 
-    return res.status(200).json({
-      status: 200,
+    return res.status(httpStatus.ok).json({
+      status: httpStatus.ok,
       success: true
     });
   }
